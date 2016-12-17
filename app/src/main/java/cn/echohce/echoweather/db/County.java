@@ -1,5 +1,6 @@
 package cn.echohce.echoweather.db;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import org.litepal.crud.DataSupport;
@@ -15,7 +16,7 @@ public class County extends DataSupport {
      * name : 北京
      * weather_id : CN101010100
      */
-
+    @Expose
     private int id;
 
     public int getId() {
@@ -26,14 +27,13 @@ public class County extends DataSupport {
         this.id = id;
     }
 
-    // 当前县所属市的id
-    @SerializedName("id")
+
     private int cityId;
 
-    @SerializedName("name")
+
     private String countyName;
 
-    @SerializedName("weather_id")
+
     private String weatherId;
 
     public int getCityId() {

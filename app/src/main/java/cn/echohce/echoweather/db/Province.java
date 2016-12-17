@@ -1,7 +1,5 @@
 package cn.echohce.echoweather.db;
 
-import com.google.gson.annotations.SerializedName;
-
 import org.litepal.crud.DataSupport;
 
 /**
@@ -9,13 +7,11 @@ import org.litepal.crud.DataSupport;
  */
 
 public class Province extends DataSupport {
-    // 实体类应有的字段
+
     private int id;
 
-    // 省的名字
     private String provinceName;
-
-    // 省的编号
+    
     private int provinceCode;
 
     public int getId() {
