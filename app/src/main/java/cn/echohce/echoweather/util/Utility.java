@@ -17,6 +17,7 @@ import java.util.List;
 import cn.echohce.echoweather.db.City;
 import cn.echohce.echoweather.db.County;
 import cn.echohce.echoweather.db.Province;
+import cn.echohce.echoweather.gson.Weather;
 
 /**
  * Created by lin on 2016/12/16.
@@ -83,6 +84,19 @@ public class Utility {
             }
         }
         return false;
+    }
+
+    public static Weather handleWeatherResponse(String response){
+        try {
+            Log.d("Echo", response);
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent, Weather.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
