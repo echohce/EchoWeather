@@ -26,6 +26,7 @@ import java.util.List;
 import cn.echohce.echoweather.db.City;
 import cn.echohce.echoweather.db.County;
 import cn.echohce.echoweather.db.Province;
+import cn.echohce.echoweather.gson.Weather;
 import cn.echohce.echoweather.util.HttpUtil;
 import cn.echohce.echoweather.util.Utility;
 import okhttp3.Call;
@@ -111,11 +112,21 @@ public class ChooseAreaFragment extends Fragment {
                 }
                 else if (currentLevel == LEVEL_COUNTY){
                     String weatherId = mCountyList.get(position).getWeatherId();
-                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
-                    intent.putExtra("weather_id", weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
-                }
+                    if (getActivity() instanceof MainActivity){
+                        Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id", weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                    else if (getActivity() instanceof WeatherActivity){
+                        WeatherActivity activity = (WeatherActivity) getActivity();
+                        activity.mDrawerLayout.closeDrawers();
+                        activity.mSwipeRefreshLayout.setRefreshing(true);
+                        activity.requestWeather(weatherId);
+
+            }
+
+        }
             }
         });
         queryProvinces();
